@@ -21,6 +21,10 @@ class RiceballController extends Controller {
   def list = Action {
     Ok(views.html.riceball(Riceball.all(), riceballForm))
   }
+
+  def detail(id: Long) = Action {
+    Ok(views.html.detail(Riceball.select(id)))
+  }
   
   def add = Action { implicit request =>
     riceballForm.bindFromRequest.fold(

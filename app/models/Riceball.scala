@@ -20,6 +20,10 @@ object Riceball {
     SQL("select * from riceball").as(riceball *)
   }
   
+  def select(id: Long): Riceball = DB.withConnection { implicit c =>
+    SQL("select * from riceball where id = {id}").on('id -> id).as(riceball *).head
+  }
+
   def create(name: String) {
     DB.withConnection { implicit c =>
       SQL("insert into riceball (name) values ({name})").on(

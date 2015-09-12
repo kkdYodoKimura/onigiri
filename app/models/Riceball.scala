@@ -5,14 +5,16 @@ import anorm.SqlParser._
 import play.api.db._
 import play.api.Play.current
 
-case class Riceball(id: Long, name: String)
+case class Riceball(id: Long, name: String, store: String, description: String)
 
 object Riceball {
 
   val riceball = {
     get[Long]("id") ~ 
-    get[String]("name") map {
-      case id~name => Riceball(id, name)
+    get[String]("name") ~
+    get[String]("store") ~
+    get[String]("description") map {
+      case id~name~store~description => Riceball(id, name, store, description)
     }
   }
 
@@ -26,8 +28,12 @@ object Riceball {
 
   def create(name: String) {
     DB.withConnection { implicit c =>
-      SQL("insert into riceball (name) values ({name})").on(
-        'name -> name
+      SQL("insert into riceball (name, store, description)
+             values ({name}, {store}, {description})"
+      ).on(
+        'name -> name,
+        'store -> "famima",
+        'description -> "oisii"
       ).executeUpdate()
     }
   }

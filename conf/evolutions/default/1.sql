@@ -5,7 +5,9 @@
 CREATE SEQUENCE riceball_id_seq;
 CREATE TABLE riceball (
     id integer NOT NULL DEFAULT nextval('riceball_id_seq'),
-    name varchar(255)
+    name varchar(255),
+    store varchar(255),
+    description varchar(255)
 );
  
 # --- !Downs

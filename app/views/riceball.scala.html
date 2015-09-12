@@ -1,0 +1,31 @@
+@(riceballs: List[Riceball], riceballForm: Form[String])(implicit messages: Messages)
+
+@import helper._
+
+@main("Todo list") {
+    
+    <h1>@riceballs.size 個のおにぎりが登録されています。</h1>
+    
+    <ul>
+        @riceballs.map { riceball =>
+            <li>
+                @riceball.name
+                
+                @form(routes.RiceballController.delete(riceball.id)) {
+                    <input type="submit" value="Delete">
+                }
+            </li>
+        }
+    </ul>
+    
+    <h2>新しく見つけたおにぎりを投稿する</h2>
+    
+    @form(routes.RiceballController.add) {
+        
+        @inputText(riceballForm("name")) 
+        
+        <input type="submit" value="Create">
+        
+    }
+    
+}

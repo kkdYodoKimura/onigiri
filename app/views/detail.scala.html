@@ -5,8 +5,12 @@
 @main(riceball.name) {
     
     <h1>@riceball.name の詳細ページ</h1>
+    <div>
     <li>店舗</li>
     @riceball.store
     <li>説明</li>
     @riceball.description
+    </div>
+
+    <input type="button" onclick="location.href='@routes.RiceballController.formModify'" value="編集">
 }

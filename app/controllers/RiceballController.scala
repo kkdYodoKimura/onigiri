@@ -43,6 +43,10 @@ class RiceballController extends Controller {
       }
     )
   }
+
+  def formModify = TODO
+
+  def modify = TODO
   
   def delete(id: Long) = Action {
     Riceball.delete(id)

@@ -26,14 +26,12 @@ object Riceball {
     SQL("select * from riceball where id = {id}").on('id -> id).as(riceball *).head
   }
 
-  def create(name: String) {
+  def create(name: String, store: String, description: String) {
     DB.withConnection { implicit c =>
-      SQL("insert into riceball (name, store, description)
-             values ({name}, {store}, {description})"
-      ).on(
+      SQL("insert into riceball (name, store, description) values ({name}, {store}, {description})").on(
         'name -> name,
-        'store -> "famima",
-        'description -> "oisii"
+        'store -> store,
+        'description -> description
       ).executeUpdate()
     }
   }

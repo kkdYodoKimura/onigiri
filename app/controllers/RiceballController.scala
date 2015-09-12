@@ -11,7 +11,11 @@ import models._
 class RiceballController extends Controller {
 
   val riceballForm = Form(
-  "name" -> nonEmptyText
+    tuple(
+      "name" -> nonEmptyText,
+      "store" -> nonEmptyText,
+      "description" -> text
+    )
   )
 
   def index = Action {
@@ -19,18 +23,22 @@ class RiceballController extends Controller {
   }
 
   def list = Action {
-    Ok(views.html.riceball(Riceball.all(), riceballForm))
+    Ok(views.html.riceball(Riceball.all()))
   }
 
   def detail(id: Long) = Action {
     Ok(views.html.detail(Riceball.select(id)))
   }
   
+  def formAdd = Action{
+    Ok(views.html.formAdd(riceballForm))
+  }
+
   def add = Action { implicit request =>
     riceballForm.bindFromRequest.fold(
-      errors => BadRequest(views.html.riceball(Riceball.all(), errors)),
-      name => {
-        Riceball.create(name)
+      errors => BadRequest(views.html.riceball(Riceball.all())),
+      data => {
+        Riceball.create(data._1, data._2, data._3)
         Redirect(routes.RiceballController.list)
       }
     )

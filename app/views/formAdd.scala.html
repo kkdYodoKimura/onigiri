@@ -1,0 +1,19 @@
+@(riceballForm: Form[(String,String,String)])(implicit messages: Messages)
+
+@import helper._
+
+@main("おにぎり新規登録") {
+    
+    <h2>新しく見つけたおにぎりを投稿する</h2>
+    
+    @form(routes.RiceballController.add) {
+        
+        @inputText(riceballForm("name")) 
+        @inputText(riceballForm("store")) 
+        @inputText(riceballForm("description")) 
+        
+        <input type="submit" value="Create">
+        
+    }
+    
+}

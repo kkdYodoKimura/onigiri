@@ -10,7 +10,6 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 # Riceball List
 GET     /riceball                   controllers.RiceballController.list
-POST    /riceball/:id/delete        controllers.RiceballController.delete(id: Long)
 
 # Riceball Add
 GET     /riceball/add               controllers.RiceballController.formAdd
@@ -19,6 +18,9 @@ POST    /riceball/add               controllers.RiceballController.add
 # Riceball Modify
 GET     /riceball/:id/modify        controllers.RiceballController.formModify(id: Long)
 POST    /riceball/:id/modify        controllers.RiceballController.modify(id: Long)
+
+# Riceball Delete
+POST    /riceball/:id/delete        controllers.RiceballController.delete(id: Long)
 
 # Riceball Detail
 GET     /riceball/:id               controllers.RiceballController.detail(id: Long)

@@ -12,5 +12,8 @@
     @riceball.description
     </div>
 
-    <input type="button" onclick="location.href='@routes.RiceballController.formModify(riceball.id)'" value="編集">
+    <input type="button" value="編集" onclick="location.href='@routes.RiceballController.formModify(riceball.id)'">
+    @form(routes.RiceballController.delete(riceball.id)) {
+        <input type="submit" value="削除">
+    }
 }

@@ -10,13 +10,7 @@
 
     <ul>
         @riceballs.map { riceball =>
-            <li>
-                <a href=@routes.RiceballController.detail(riceball.id)>@riceball.name</a>
-                
-                @form(routes.RiceballController.delete(riceball.id)) {
-                    <input type="submit" value="Delete">
-                }
-            </li>
+            <li><a href=@routes.RiceballController.detail(riceball.id)>@riceball.name</a></li>
         }
     </ul>
     

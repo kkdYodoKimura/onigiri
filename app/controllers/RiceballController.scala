@@ -23,7 +23,7 @@ class RiceballController extends Controller {
   }
 
   def list = Action {
-    Ok(views.html.riceball(Riceball.all()))
+    Ok(views.html.riceball(Riceball.all(), Store.all()))
   }
 
   def detail(id: Long) = Action {
@@ -37,7 +37,7 @@ class RiceballController extends Controller {
 
   def add = Action { implicit request =>
     riceballForm.bindFromRequest.fold(
-      errors => BadRequest(views.html.riceball(Riceball.all())),
+      errors => BadRequest(views.html.riceball(Riceball.all(), Store.all())),
       data => {
         Riceball.create(data._1, data._2, data._3)
         Redirect(routes.RiceballController.list)
@@ -56,7 +56,7 @@ class RiceballController extends Controller {
 
   def modify(id: Long) = Action { implicit request =>
     riceballForm.bindFromRequest.fold(
-      errors => BadRequest(views.html.riceball(Riceball.all())),
+      errors => BadRequest(views.html.riceball(Riceball.all(), Store.all())),
       data => {
         Riceball.update(id, data._1, data._2, data._3)
         Redirect(routes.RiceballController.detail(id))

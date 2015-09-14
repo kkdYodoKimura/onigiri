@@ -1,17 +1,24 @@
-@(riceballs: List[Riceball])(implicit messages: Messages)
+@(riceballs: List[Riceball], stores: List[Store])(implicit messages: Messages)
 
 @import helper._
 
-@main("Todo list") {
-    
-    <h1>@riceballs.size 個のおにぎりが登録されています。</h1>
-    
-    <input type="button" onclick="location.href='@routes.RiceballController.add'" value="おにぎり登録">
+@main("おにぎりデータベース") {
 
-    <ul>
-        @riceballs.map { riceball =>
-            <li><a href=@routes.RiceballController.detail(riceball.id)>@riceball.name</a></li>
-        }
-    </ul>
-    
+  <h1>@riceballs.size 個のおにぎりが登録されています。</h1>
+
+  <input type="button" onclick="location.href='@routes.RiceballController.add'" value="おにぎり登録">
+
+  <table>
+    <tr>
+      <th>具の名前</th>
+      <th>売っている店舗</th>
+    </tr>
+    @riceballs.map { riceball =>
+      <tr>
+        <td><a href=@routes.RiceballController.detail(riceball.id)>@riceball.name</a></td>
+        <td>@stores.find(s => s.id == riceball.storeId).get.name</td>
+      </tr>
+    }
+  </table>
+
 }

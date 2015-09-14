@@ -1,16 +1,16 @@
-@(riceball: Riceball, riceballForm: Form[(String,String,String)])(implicit messages: Messages)
+@(riceball: Riceball, riceballForm: Form[(String,Int,String)], stores: List[Store])(implicit messages: Messages)
 
 @import helper._
 
 @main("おにぎり編集") {
     
-    <h2>@riceball.store の @riceball.name を編集する</h2>
+    <h2>@riceball.name を編集する</h2>
     
     @form(routes.RiceballController.modify(riceball.id)) {
-        
+        <!-- TODO 店舗名DB参照させたい -->
         @inputText(riceballForm("name")) 
-        @inputText(riceballForm("store")) 
-        @inputText(riceballForm("description")) 
+        @select(field = riceballForm("storeId"), options("1"->"ファミリーマート", "2"->"ココストア", "3"->"セブンイレブン", "4"->"ローソン","5"->"サンクス", "6"->"デイリーヤマザキ", "7"->"ハートイン", "8"->"その他"))
+        @inputText(riceballForm("description"))
         
         <input type="submit" value="編集">
         

@@ -1,4 +1,4 @@
-@(riceball: Riceball)(implicit messages: Messages)
+@(riceball: Riceball, store: Store)(implicit messages: Messages)
 
 @import helper._
 
@@ -7,7 +7,7 @@
     <h1>@riceball.name の詳細ページ</h1>
     <div>
     <li>店舗</li>
-    @riceball.store
+    @store.name
     <li>説明</li>
     @riceball.description
     </div>

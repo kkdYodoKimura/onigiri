@@ -5,16 +5,16 @@ import anorm.SqlParser._
 import play.api.db._
 import play.api.Play.current
 
-case class Riceball(id: Long, name: String, store: String, description: String)
+case class Riceball(id: Long, name: String, storeId: Int, description: String)
 
 object Riceball {
 
   val riceball = {
     get[Long]("id") ~ 
     get[String]("name") ~
-    get[String]("store") ~
+    get[Int]("store_id") ~
     get[String]("description") map {
-      case id~name~store~description => Riceball(id, name, store, description)
+      case id~name~storeId~description => Riceball(id, name, storeId, description)
     }
   }
 
@@ -26,22 +26,22 @@ object Riceball {
     SQL("select * from riceball where id = {id}").on('id -> id).as(riceball *).head
   }
 
-  def create(name: String, store: String, description: String) {
+  def create(name: String, storeId: Int, description: String) {
     DB.withConnection { implicit c =>
-      SQL("insert into riceball (name, store, description) values ({name}, {store}, {description})").on(
+      SQL("insert into riceball (name, store_id, description) values ({name}, {store_id}, {description})").on(
         'name -> name,
-        'store -> store,
+        'store_id -> storeId,
         'description -> description
       ).executeUpdate()
     }
   }
 
-  def update(id: Long, name: String, store: String, description: String) {
+  def update(id: Long, name: String, storeId: Int, description: String) {
     DB.withConnection { implicit c =>
-      SQL("update riceball set name = {name}, store = {store}, description = {description} where id = {id}").on(
+      SQL("update riceball set name = {name}, store_id = {store_id}, description = {description} where id = {id}").on(
         'id -> id,
         'name -> name,
-        'store -> store,
+        'store_id -> storeId,
         'description -> description
       ).executeUpdate()
     }

@@ -13,7 +13,7 @@ class RiceballController extends Controller {
   val riceballForm = Form(
     tuple(
       "name" -> nonEmptyText,
-      "store" -> nonEmptyText,
+      "storeId" -> number,
       "description" -> text
     )
   )
@@ -27,11 +27,12 @@ class RiceballController extends Controller {
   }
 
   def detail(id: Long) = Action {
-    Ok(views.html.detail(Riceball.select(id)))
+    val riceball = Riceball.select(id)
+    Ok(views.html.detail(riceball, Store.select(riceball.storeId)))
   }
   
   def formAdd = Action {
-    Ok(views.html.formAdd(riceballForm))
+    Ok(views.html.formAdd(riceballForm, Store.all))
   }
 
   def add = Action { implicit request =>
@@ -48,9 +49,9 @@ class RiceballController extends Controller {
     val riceball = Riceball.select(id)
     Ok(views.html.formModify(riceball, riceballForm.fill(
       riceball.name,
-      riceball.store,
+      riceball.storeId,
       riceball.description
-    )))
+    ), Store.all))
   }
 
   def modify(id: Long) = Action { implicit request =>

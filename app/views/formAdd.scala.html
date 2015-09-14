@@ -1,4 +1,4 @@
-@(riceballForm: Form[(String,String,String)])(implicit messages: Messages)
+@(riceballForm: Form[(String,Int,String)], stores: List[Store])(implicit messages: Messages)
 
 @import helper._
 
@@ -7,9 +7,9 @@
     <h2>新しく見つけたおにぎりを投稿する</h2>
     
     @form(routes.RiceballController.add) {
-        
+        <!-- TODO 店舗名DB参照させたい -->
         @inputText(riceballForm("name")) 
-        @inputText(riceballForm("store")) 
+        @select(field = riceballForm("storeId"), options(("1"->"ファミリーマート"), ("2"->"ココストア"), ("3"->"セブンイレブン"), ("4"->"ローソン"),("5"->"サンクス"), ("6"->"デイリーヤマザキ"), ("7"->"ハートイン"), ("8"->"その他"))) 
         @inputText(riceballForm("description")) 
         
         <input type="submit" value="Create">

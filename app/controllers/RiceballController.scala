@@ -53,7 +53,15 @@ class RiceballController extends Controller {
     )))
   }
 
-  def modify(id: Long) = TODO
+  def modify(id: Long) = Action { implicit request =>
+    riceballForm.bindFromRequest.fold(
+      errors => BadRequest(views.html.riceball(Riceball.all())),
+      data => {
+        Riceball.update(id, data._1, data._2, data._3)
+        Redirect(routes.RiceballController.detail(id))
+      }
+    )
+  }
   
   def delete(id: Long) = Action {
     Riceball.delete(id)

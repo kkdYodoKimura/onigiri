@@ -35,6 +35,17 @@ object Riceball {
       ).executeUpdate()
     }
   }
+
+  def update(id: Long, name: String, store: String, description: String) {
+    DB.withConnection { implicit c =>
+      SQL("update riceball set name = {name}, store = {store}, description = {description} where id = {id}").on(
+        'id -> id,
+        'name -> name,
+        'store -> store,
+        'description -> description
+      ).executeUpdate()
+    }
+  }
   
   def delete(id: Long) {
     DB.withConnection { implicit c =>

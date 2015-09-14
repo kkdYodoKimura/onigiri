@@ -30,7 +30,7 @@ class RiceballController extends Controller {
     Ok(views.html.detail(Riceball.select(id)))
   }
   
-  def formAdd = Action{
+  def formAdd = Action {
     Ok(views.html.formAdd(riceballForm))
   }
 
@@ -44,9 +44,16 @@ class RiceballController extends Controller {
     )
   }
 
-  def formModify = TODO
+  def formModify(id: Long) = Action {
+    val riceball = Riceball.select(id)
+    Ok(views.html.formModify(riceball, riceballForm.fill(
+      riceball.name,
+      riceball.store,
+      riceball.description
+    )))
+  }
 
-  def modify = TODO
+  def modify(id: Long) = TODO
   
   def delete(id: Long) = Action {
     Riceball.delete(id)

@@ -1,0 +1,19 @@
+@(riceball: Riceball, riceballForm: Form[(String,String,String)])(implicit messages: Messages)
+
+@import helper._
+
+@main("おにぎり編集") {
+    
+    <h2>@riceball.store の @riceball.name を編集する</h2>
+    
+    @form(routes.RiceballController.modify(riceball.id)) {
+        
+        @inputText(riceballForm("name")) 
+        @inputText(riceballForm("store")) 
+        @inputText(riceballForm("description")) 
+        
+        <input type="submit" value="編集">
+        
+    }
+    
+}

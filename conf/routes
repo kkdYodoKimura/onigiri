@@ -17,8 +17,8 @@ GET     /riceball/add               controllers.RiceballController.formAdd
 POST    /riceball/add               controllers.RiceballController.add
 
 # Riceball Modify
-GET     /riceball/modify            controllers.RiceballController.formModify
-POST    /riceball/modify            controllers.RiceballController.modify
+GET     /riceball/:id/modify        controllers.RiceballController.formModify(id: Long)
+POST    /riceball/:id/modify        controllers.RiceballController.modify(id: Long)
 
 # Riceball Detail
 GET     /riceball/:id               controllers.RiceballController.detail(id: Long)

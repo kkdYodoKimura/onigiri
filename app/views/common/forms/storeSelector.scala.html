@@ -1,7 +1,14 @@
 @(field: play.api.data.Field, options: List[(Int,String)], select: Int=1)
 
-<select id="store" name="store">
-  @options.map { v =>
-      <option value="@v._1" @if(select==v._1){selected="selected"}>@v._2</option>
-  }
-</select>
+<div>
+  <dl id="@field.name">
+    <dt><label for="@field.name">@field.name</lavel></dt>
+    <dd>
+      <select id="store" name="store">
+        @options.map { v =>
+          <option value="@v._1" @if(select==v._1){selected="selected"}>@v._2</option>
+        }
+      </select>
+    </dd>
+  </dl>
+</div>

@@ -1,10 +1,10 @@
-@(riceballs: List[Riceball], stores: List[Store])(implicit messages: Messages)
+@(riceballs: List[Riceball], riceballCount: Int, page: Int, pageLength: Int, stores: List[Store])(implicit messages: Messages)
 
 @import helper._
 
 @main("おにぎりデータベース") {
 
-  <h1>@riceballs.size 個のおにぎりが登録されています。</h1>
+  <h1>@riceballCount 個のおにぎりが登録されています。</h1>
 
   <input type="button" onclick="location.href='@routes.RiceballController.add'" value="おにぎり登録">
 
@@ -20,5 +20,13 @@
       </tr>
     }
   </table>
+
+  @if(page * pageLength < riceballCount){
+    <a href=@routes.RiceballController.list(page+1)>進む</a>
+  }
+  @if(page > 1){
+    <a href=@routes.RiceballController.list(page-1)>戻る</a>
+  }
+
 
 }

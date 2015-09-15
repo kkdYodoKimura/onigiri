@@ -9,7 +9,8 @@ GET     /                           controllers.Application.index
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
 # Riceball List
-GET     /riceball                   controllers.RiceballController.list
+GET     /riceball                   controllers.RiceballController.list(page: Int = 1)
+GET     /riceball/list/:page        controllers.RiceballController.list(page: Int)
 
 # Riceball Add
 GET     /riceball/add               controllers.RiceballController.formAdd

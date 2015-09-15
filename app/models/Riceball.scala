@@ -21,6 +21,15 @@ object Riceball {
   def all(): List[Riceball] = DB.withConnection { implicit c =>
     SQL("select * from riceball").as(riceball *)
   }
+
+  def list(page: Int, pageLength: Int): List[Riceball] = DB.withConnection { implicit c =>
+    SQL("select * from riceball order by id limit " + pageLength.toString
+          + " offset " + ((page - 1) * pageLength).toString).as(riceball *)
+  }
+
+  def count: Int =  DB.withConnection { implicit c =>
+    SQL("select count(*) from riceball").as(scalar[Int].single)
+  }
   
   def select(id: Long): Riceball = DB.withConnection { implicit c =>
     SQL("select * from riceball where id = {id}").on('id -> id).as(riceball *).head

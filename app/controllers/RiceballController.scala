@@ -10,6 +10,8 @@ import models._
 
 class RiceballController extends Controller {
 
+  val pageLength = 20
+
   val riceballForm = Form(
     tuple(
       "name" -> nonEmptyText,
@@ -19,11 +21,15 @@ class RiceballController extends Controller {
   )
 
   def index = Action {
-    Redirect(routes.RiceballController.list)
+    Redirect(routes.RiceballController.list(1))
   }
 
-  def list = Action {
-    Ok(views.html.riceball(Riceball.all(), Store.all()))
+  def list(page: Int) = Action {
+    Ok(views.html.riceball(Riceball.list(page, pageLength),
+                           Riceball.count,
+                           page,
+                           pageLength,
+                           Store.all))
   }
 
   def detail(id: Long) = Action {
@@ -37,10 +43,10 @@ class RiceballController extends Controller {
 
   def add = Action { implicit request =>
     riceballForm.bindFromRequest.fold(
-      errors => BadRequest(views.html.riceball(Riceball.all(), Store.all())),
+      errors => Redirect(routes.RiceballController.list(1)),
       data => {
         Riceball.create(data._1, data._2, data._3)
-        Redirect(routes.RiceballController.list)
+        Redirect(routes.RiceballController.list(1))
       }
     )
   }
@@ -56,7 +62,7 @@ class RiceballController extends Controller {
 
   def modify(id: Long) = Action { implicit request =>
     riceballForm.bindFromRequest.fold(
-      errors => BadRequest(views.html.riceball(Riceball.all(), Store.all())),
+      errors => Redirect(routes.RiceballController.list(1)),
       data => {
         Riceball.update(id, data._1, data._2, data._3)
         Redirect(routes.RiceballController.detail(id))
@@ -66,7 +72,7 @@ class RiceballController extends Controller {
   
   def delete(id: Long) = Action {
     Riceball.delete(id)
-    Redirect(routes.RiceballController.list)
+    Redirect(routes.RiceballController.list(1))
   }
 
 }

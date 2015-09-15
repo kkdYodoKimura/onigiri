@@ -23,5 +23,8 @@ POST    /riceball/:id/modify        controllers.RiceballController.modify(id: Lo
 # Riceball Delete
 POST    /riceball/:id/delete        controllers.RiceballController.delete(id: Long)
 
+# Riceball Search
+POST    /riceball/search            controllers.RiceballController.search
+
 # Riceball Detail
 GET     /riceball/:id               controllers.RiceballController.detail(id: Long)

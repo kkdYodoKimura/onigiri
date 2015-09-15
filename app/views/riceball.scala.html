@@ -1,11 +1,17 @@
-@(riceballs: List[Riceball], riceballCount: Int, page: Int, pageLength: Int, stores: List[Store])(implicit messages: Messages)
+@(riceballs: List[Riceball], riceballCount: Int, page: Int, pageLength: Int, stores: List[Store], searchForm: Form[(String,Int)])(implicit messages: Messages)
 
 @import helper._
+@import views.html.common.forms.storeSelector
 
 @main("おにぎりデータベース") {
 
   <h1>@riceballCount 個のおにぎりが登録されています。</h1>
 
+  @form(routes.RiceballController.search) {
+    @inputText(searchForm("word"))
+    @storeSelector(searchForm("storeId"), stores.map(s => s.id -> s.name))
+    <input type="submit" value="検索">
+  }
   <input type="button" onclick="location.href='@routes.RiceballController.add'" value="おにぎり登録">
 
   <table>

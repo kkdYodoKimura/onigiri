@@ -20,6 +20,8 @@ class RiceballController extends Controller {
     )
   )
 
+  val searchform = Form(tuple("word" -> text, "storeId" -> number))
+
   def index = Action {
     Redirect(routes.RiceballController.list(1))
   }
@@ -29,7 +31,8 @@ class RiceballController extends Controller {
                            Riceball.count,
                            page,
                            pageLength,
-                           Store.all))
+                           Store.all,
+                           searchform))
   }
 
   def detail(id: Long) = Action {
@@ -74,5 +77,7 @@ class RiceballController extends Controller {
     Riceball.delete(id)
     Redirect(routes.RiceballController.list(1))
   }
+
+  def search = TODO
 
 }

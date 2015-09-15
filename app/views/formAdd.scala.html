@@ -1,6 +1,7 @@
 @(riceballForm: Form[(String,Int,String)], stores: List[Store])(implicit messages: Messages)
 
 @import helper._
+@import views.html.common.forms.storeSelector
 
 @main("おにぎり新規登録") {
     
@@ -8,7 +9,7 @@
     
     @form(routes.RiceballController.add) {
         @inputText(riceballForm("name")) 
-        @select(field = riceballForm("storeId"), options(stores.map(s => s.id.toString -> s.name).toMap))
+        @storeSelector(riceballForm("storeId"), stores.map(s => s.id -> s.name))
         @inputText(riceballForm("description")) 
         
         <input type="submit" value="Create">

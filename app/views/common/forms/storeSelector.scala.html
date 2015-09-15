@@ -1,3 +1,4 @@
+<!-- selectに0を指定した時だけ「無指定」が登場する -->
 @(field: play.api.data.Field, options: List[(Int,String)], select: Int=1)
 
 <div>
@@ -5,6 +6,9 @@
     <dt><label for="@field.name">@field.name</lavel></dt>
     <dd>
       <select id="store" name="store">
+        @if(select==0){
+          <option value="0">無指定</option>
+        }
         @options.map { v =>
           <option value="@v._1" @if(select==v._1){selected="selected"}>@v._2</option>
         }

@@ -9,7 +9,7 @@
 
   @form(routes.RiceballController.search) {
     @inputText(searchForm("word"))
-    @storeSelector(searchForm("storeId"), stores.map(s => s.id -> s.name))
+    @storeSelector(searchForm("storeId"), stores.map(s => s.id -> s.name), 0)
     <input type="submit" value="検索">
   }
   <input type="button" onclick="location.href='@routes.RiceballController.add'" value="おにぎり登録">

@@ -20,7 +20,7 @@ class RiceballController extends Controller {
     )
   )
 
-  val searchform = Form(tuple("word" -> text, "storeId" -> number))
+  val searchform = Form(tuple("keyword" -> text, "storeId" -> number))
 
   def index = Action {
     Redirect(routes.RiceballController.list(1))
@@ -46,7 +46,7 @@ class RiceballController extends Controller {
 
   def add = Action { implicit request =>
     riceballForm.bindFromRequest.fold(
-      errors => Redirect(routes.RiceballController.list(1)),
+      errors => BadRequest(views.html.error("値が異常です。")),
       data => {
         Riceball.create(data._1, data._2, data._3)
         Redirect(routes.RiceballController.list(1))
@@ -65,7 +65,7 @@ class RiceballController extends Controller {
 
   def modify(id: Long) = Action { implicit request =>
     riceballForm.bindFromRequest.fold(
-      errors => Redirect(routes.RiceballController.list(1)),
+      errors => BadRequest(views.html.error("値が異常です。")),
       data => {
         Riceball.update(id, data._1, data._2, data._3)
         Redirect(routes.RiceballController.detail(id))

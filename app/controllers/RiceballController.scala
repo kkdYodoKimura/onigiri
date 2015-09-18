@@ -78,6 +78,14 @@ class RiceballController extends Controller {
     Redirect(routes.RiceballController.list(1))
   }
 
-  def search = TODO
+  def search() = Action { implicit request =>
+    searchform.bindFromRequest.fold(
+      errors => BadRequest(views.html.error("検索条件が異常です。")),
+      data => {
+        val hitRiceballs = Riceball.search(data._1, data._2)
+        Ok(views.html.searchResult(hitRiceballs, Store.all))
+      }
+    )
+  }
 
 }

@@ -35,6 +35,21 @@ object Riceball {
     SQL("select * from riceball where id = {id}").on('id -> id).as(riceball *).head
   }
 
+  def search(keyword: String, storeId: Int): List[Riceball] = DB.withConnection { implicit c =>
+    require(keyword.length > 0 || storeId != 0) // どちらかは必ず指定
+    val storeCond   =
+      if(storeId != 0) "store_id = " + storeId.toString
+      else ""
+    val keywordCond =
+      if(keyword.length != 0) "(name like '%" + keyword + "%' or description like '%" + keyword +"%')"
+      else ""
+    val and =
+      if(storeCond.length != 0 && keywordCond.length != 0) " and "
+      else ""
+    val sql = "select * from riceball where " + storeCond + and + keywordCond
+    SQL(sql).as(riceball *)
+  }
+
   def create(name: String, storeId: Int, description: String) {
     DB.withConnection { implicit c =>
       SQL("insert into riceball (name, store_id, description) values ({name}, {store_id}, {description})").on(

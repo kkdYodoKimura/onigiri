@@ -13,8 +13,9 @@ object Riceball {
     get[Long]("id") ~ 
     get[String]("name") ~
     get[Int]("store_id") ~
+    get[String]("image_url") ~
     get[String]("description") map {
-      case id~name~storeId~description => Riceball(id, name, storeId, "http://design-ec.com/d/e_others_50/m_e_others_500.png", description)
+      case id~name~storeId~imageUrl~description => Riceball(id, name, storeId, imageUrl, description)
     }
   }
 
@@ -50,22 +51,24 @@ object Riceball {
     SQL(sql).as(riceball *)
   }
 
-  def create(name: String, storeId: Int, description: String) {
+  def create(name: String, storeId: Int, imageUrl: String, description: String) {
     DB.withConnection { implicit c =>
-      SQL("insert into riceball (name, store_id, description) values ({name}, {store_id}, {description})").on(
+      SQL("insert into riceball (name, store_id, image_url, description) values ({name}, {store_id}, {image_url}, {description})").on(
         'name -> name,
         'store_id -> storeId,
+        'image_url -> imageUrl,
         'description -> description
       ).executeUpdate()
     }
   }
 
-  def update(id: Long, name: String, storeId: Int, description: String) {
+  def update(id: Long, name: String, storeId: Int, imageUrl: String, description: String) {
     DB.withConnection { implicit c =>
-      SQL("update riceball set name = {name}, store_id = {store_id}, description = {description} where id = {id}").on(
+      SQL("update riceball set name = {name}, store_id = {store_id}, image_url = {image_url}, description = {description} where id = {id}").on(
         'id -> id,
         'name -> name,
         'store_id -> storeId,
+        'image_url -> imageUrl,
         'description -> description
       ).executeUpdate()
     }

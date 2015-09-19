@@ -35,6 +35,11 @@ a:active {/*クリック中*/
     text-decoration:none;
 }
 
+img{
+   max-width: 580px;
+   height: auto;
+}
+
 .main {
   background-color: #FFF;
   padding: 10px;

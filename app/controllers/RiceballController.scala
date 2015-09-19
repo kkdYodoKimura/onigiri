@@ -16,8 +16,8 @@ class RiceballController extends Controller {
     tuple(
       "name" -> nonEmptyText,
       "storeId" -> number,
-      "description" -> text,
-      "imgurl" -> text
+      "imgurl" -> text,
+      "description" -> text
     )
   )
 
@@ -49,7 +49,7 @@ class RiceballController extends Controller {
     riceballForm.bindFromRequest.fold(
       errors => BadRequest(views.html.error("値が異常です。")),
       data => {
-        Riceball.create(data._1, data._2, data._3)
+        Riceball.create(data._1, data._2, data._3, data._4)
         Redirect(routes.RiceballController.list(1))
       }
     )
@@ -64,7 +64,7 @@ class RiceballController extends Controller {
     riceballForm.bindFromRequest.fold(
       errors => BadRequest(views.html.error("値が異常です。")),
       data => {
-        Riceball.update(id, data._1, data._2, data._3)
+        Riceball.update(id, data._1, data._2, data._3, data._4)
         Redirect(routes.RiceballController.detail(id))
       }
     )

@@ -1,38 +1,45 @@
 @(riceballs: List[Riceball], riceballCount: Int, page: Int, pageLength: Int, stores: List[Store], searchForm: Form[(String,Int)])(implicit messages: Messages)
 
 @import helper._
-@import views.html.common.forms.storeSelector
+@import views.html.common.forms._
 
 @main("おにぎりデータベース") {
+  <div class="main">
+    <h1 class="title">おにぎりデータベース</h1>
+    @riceballCount 個のおにぎりが登録されています。
 
-  <h1>@riceballCount 個のおにぎりが登録されています。</h1>
+    <div class="form form-inline">
+      @form(routes.RiceballController.search) {
+        @myTextForm(field = searchForm("keyword"), label = "キーワード", placeholder = "名前または説明文で検索")
+        @storeSelector(searchForm("storeId"), stores.map(s => s.id -> s.name), 0)
+        <input class="btn btn-info" type="submit" value="検索">
+      }
+    </div>
 
-  @form(routes.RiceballController.search) {
-    @inputText(searchForm("keyword"))
-    @storeSelector(searchForm("storeId"), stores.map(s => s.id -> s.name), 0)
-    <input type="submit" value="検索">
-  }
-  <input type="button" onclick="location.href='@routes.RiceballController.add'" value="おにぎり登録">
+    <div class="addForm">
+      <input class="btn btn-primary" type="button" onclick="location.href='@routes.RiceballController.add'" value="おにぎり登録">
+    </div>
 
-  <table>
-    <tr>
-      <th>具の名前</th>
-      <th>売っている店舗</th>
-    </tr>
-    @riceballs.map { riceball =>
+    <table class="table table-striped">
       <tr>
-        <td><a href=@routes.RiceballController.detail(riceball.id)>@riceball.name</a></td>
-        <td>@stores.find(s => s.id == riceball.storeId).get.name</td>
+        <th>具の名前</th>
+        <th>売っている店舗</th>
       </tr>
-    }
-  </table>
+      @riceballs.map { riceball =>
+        <tr>
+          <td><a href=@routes.RiceballController.detail(riceball.id)>@riceball.name</a></td>
+          <td>@stores.find(s => s.id == riceball.storeId).get.name</td>
+        </tr>
+      }
+    </table>
 
-  @if(page * pageLength < riceballCount){
-    <a href=@routes.RiceballController.list(page+1)>進む</a>
-  }
-  @if(page > 1){
-    <a href=@routes.RiceballController.list(page-1)>戻る</a>
-  }
-
-
+    <div class="pageController">
+      @if(page * pageLength < riceballCount){
+        <a class="btn btn-default" href=@routes.RiceballController.list(page+1)>進む</a>
+      }
+      @if(page > 1){
+        <a class="btn btn-default" href=@routes.RiceballController.list(page-1)>戻る</a>
+      }
+    </div>
+  </div>
 }

@@ -5,19 +5,20 @@
 
 @main("検索結果") {
 
-  <h1>@riceballs.length 個のおにぎりがヒットしました。</h1>
+  <div class="main">
+    <h1>@riceballs.length 個のおにぎりがヒットしました。</h1>
 
-  <table>
-    <tr>
-      <th>具の名前</th>
-      <th>売っている店舗</th>
-    </tr>
-    @riceballs.map { riceball =>
+    <table class="table table-striped">
       <tr>
-        <td><a href=@routes.RiceballController.detail(riceball.id)>@riceball.name</a></td>
-        <td>@stores.find(s => s.id == riceball.storeId).get.name</td>
+        <th>具の名前</th>
+        <th>売っている店舗</th>
       </tr>
-    }
-  </table>
-
+      @riceballs.map { riceball =>
+        <tr>
+          <td><a href=@routes.RiceballController.detail(riceball.id)>@riceball.name</a></td>
+          <td>@stores.find(s => s.id == riceball.storeId).get.name</td>
+        </tr>
+      }
+    </table>
+  </div>
 }

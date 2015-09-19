@@ -3,19 +3,20 @@
 @import helper._
 
 @main(riceball.name) {
-    
-    <h1>@riceball.name の詳細ページ</h1>
-    <div>
+  <div class="main">
+    <h1 class="title">@riceball.name</h1>
+    <div class="info">
     <li>店舗</li>
     @store.name
     <li>説明</li>
     @riceball.description
     </div>
 
-    <input type="button" value="編集" onclick="location.href='@routes.RiceballController.formModify(riceball.id)'">
+    <input class="btn btn-primary" type="button" value="編集" onclick="location.href='@routes.RiceballController.formModify(riceball.id)'">
     @form(routes.RiceballController.delete(riceball.id)) {
-        <input type="submit" value="削除">
+        <input class="btn btn-danger" type="submit" value="削除">
     }
 
-    <a href=@routes.RiceballController.list(1)>一覧に戻る</a>
+    <a class="btn btn-default" href=@routes.RiceballController.list(1)>一覧に戻る</a>
+  </div>
 }

@@ -1,17 +1,11 @@
 @(field: play.api.data.Field, options: List[(Int,String)], select: Int = 1)
 
-<div>
-  <dl id="@field.name">
-    <dt><label for="@field.name">@field.name</lavel></dt>
-    <dd>
-      <select id="storeId" name="storeId">
-        @if(select==0){
-          <option value="0">無指定</option>
-        }
-        @options.map { v =>
-          <option value="@v._1" @if(select==v._1){selected="selected"}>@v._2</option>
-        }
-      </select>
-    </dd>
-  </dl>
-</div>
+<label for="storeId">店舗名</label>
+<select class="form-control" id="storeId" name="storeId">
+  @if(select==0){
+    <option value="0">無指定</option>
+  }
+  @options.map { v =>
+    <option value="@v._1" @if(select==v._1){selected="selected"}>@v._2</option>
+  }
+</select>

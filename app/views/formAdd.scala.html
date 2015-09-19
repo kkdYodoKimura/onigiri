@@ -1,19 +1,18 @@
 @(riceballForm: Form[(String,Int,String)], stores: List[Store])(implicit messages: Messages)
 
 @import helper._
-@import views.html.common.forms.storeSelector
+@import views.html.common.forms._
 
 @main("おにぎり新規登録") {
-    
-    <h2>新しく見つけたおにぎりを投稿する</h2>
+ <div class="main"> 
+    <h1 class="title">おにぎりを登録する</h1>
     
     @form(routes.RiceballController.add) {
-        @inputText(riceballForm("name")) 
+        @myTextForm(field = riceballForm("name"), label = "名前")
         @storeSelector(riceballForm("storeId"), stores.map(s => s.id -> s.name))
-        @inputText(riceballForm("description")) 
+        @myTextForm(field = riceballForm("description"), label = "説明")
         
-        <input type="submit" value="Create">
-        
+        <input class="btn btn-primary" type="submit" value="登録">
     }
-    
+  </div>
 }

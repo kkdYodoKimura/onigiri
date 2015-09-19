@@ -1,0 +1,49 @@
+html{
+  font-size: 14px;
+  height: 100%;
+  background-image: url("../images/bgriceball.png")
+}
+
+body{
+  width: 600px;
+  direction: ltr;
+  text-align: left;
+  margin: 0 auto;
+  unicode-bidi: embed;
+}
+
+a{/*リンクされた文字*/
+    color:006600;
+    font-style:normal;
+    text-decoration:underline;
+}
+a:link {/*未訪問のリンク*/
+    color:#006600;
+    font-style:normal;
+    text-decoration:underline;
+}
+a:visited {/*訪問後のリンク*/
+    color:#006600;
+    text-decoration:underline;
+}
+a:hover {/*マウスをのせたとき*/
+    color:#999900;
+    font-style:normal;
+    text-decoration:underline;
+}
+a:active {/*クリック中*/
+    text-decoration:none;
+}
+
+.main {
+  background-color: #FFF;
+  padding: 10px;
+}
+
+.title {
+  text-align: center;
+}
+
+.form {
+  padding: 10px;
+}

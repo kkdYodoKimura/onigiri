@@ -1,4 +1,4 @@
-@(riceballForm: Form[(String,Int,String)], stores: List[Store])(implicit messages: Messages)
+@(riceballForm: Form[(String,Int,String,String)], stores: List[Store])(implicit messages: Messages)
 
 @import helper._
 @import views.html.common.forms._
@@ -11,6 +11,7 @@
         @myTextForm(field = riceballForm("name"), label = "名前")
         @storeSelector(riceballForm("storeId"), stores.map(s => s.id -> s.name))
         @myTextForm(field = riceballForm("description"), label = "説明")
+        @myTextForm(field = riceballForm("imgurl"), label = "画像URL")
         
         <input class="btn btn-primary" type="submit" value="登録">
     }

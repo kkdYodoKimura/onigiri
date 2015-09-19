@@ -5,11 +5,14 @@
 @main(riceball.name) {
   <div class="main">
     <h1 class="title">@riceball.name</h1>
+    <div align="center">
+      <img src="@riceball.imageUrl">
+    </div>
     <div class="info">
-    <li>店舗</li>
-    @store.name
-    <li>説明</li>
-    @riceball.description
+      <li>店舗</li>
+      @store.name
+      <li>説明</li>
+      @riceball.description
     </div>
 
     <input class="btn btn-primary" type="button" value="編集" onclick="location.href='@routes.RiceballController.formModify(riceball.id)'">

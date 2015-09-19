@@ -5,7 +5,7 @@ import anorm.SqlParser._
 import play.api.db._
 import play.api.Play.current
 
-case class Riceball(id: Long, name: String, storeId: Int, description: String)
+case class Riceball(id: Long, name: String, storeId: Int, imageUrl: String, description: String)
 
 object Riceball {
 
@@ -14,7 +14,7 @@ object Riceball {
     get[String]("name") ~
     get[Int]("store_id") ~
     get[String]("description") map {
-      case id~name~storeId~description => Riceball(id, name, storeId, description)
+      case id~name~storeId~description => Riceball(id, name, storeId, "http://design-ec.com/d/e_others_50/m_e_others_500.png", description)
     }
   }
 
